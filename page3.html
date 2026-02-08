@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Questionnaire - CEO Reveal</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="background-wrapper"></div>
+
+  <div class="card">
+    <div class="card-content">
+
+      <h1>Bonus Step</h1>
+      <p class="subtitle">A little surprise...</p>
+
+      <form id="question-form">
+        <label class="question-label">Do you want to see our CEO?</label>
+
+        <!-- Tap-to-reveal div -->
+        <div id="ceo-reveal" class="reveal-box">
+          <div class="reveal-placeholder">Tap here to reveal the CEO</div>
+          <img 
+            id="ceo-image" 
+            src="./assets/me.jpg" 
+            alt="CEO Photo - Elon Musk, founder & leader of xAI" 
+            style="display: none;"
+          />
+        </div>
+
+        <!-- Hidden input to record if they revealed or not (optional tracking) -->
+        <input type="hidden" id="revealed" name="revealedCEO" value="No">
+
+        <button type="submit" class="btn primary-btn">Continue to Summary →</button>
+      </form>
+
+      <div id="status" class="status"></div>
+
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+
+  <script>
+    // Reveal logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const revealBox = document.getElementById('ceo-reveal');
+      const placeholder = document.querySelector('.reveal-placeholder');
+      const image = document.getElementById('ceo-image');
+      const hiddenInput = document.getElementById('revealed');
+
+      if (!revealBox) return;
+
+      revealBox.addEventListener('click', () => {
+        placeholder.style.display = 'none';
+        image.style.display = 'block';
+        hiddenInput.value = 'Yes';  // Mark that they tapped to reveal
+        revealBox.style.cursor = 'default';
+        revealBox.style.background = 'transparent';
+      });
+    });
+  </script>
+
+</body>
+</html>

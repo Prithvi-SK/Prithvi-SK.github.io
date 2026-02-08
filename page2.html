@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Questionnaire - Are you excited?</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="background-wrapper"></div>
+
+  <div class="card">
+    <div class="card-content">
+
+      <h1>Step 2 of 5</h1>  <!-- Adjust total steps as needed -->
+      <p class="subtitle">Quick check...</p>
+
+      <form id="question-form">
+        <label class="question-label">Are you taken for valentine's day?</label>
+
+        <!-- Hidden radios + styled button labels -->
+        <div class="yes-no-group">
+          <input 
+            type="radio" 
+            id="yes" 
+            name="excited" 
+            value="Yes" 
+            required 
+          />
+          <label for="yes" class="btn-toggle">Yes</label>
+
+          <input 
+            type="radio" 
+            id="no" 
+            name="excited" 
+            value="No" 
+          />
+          <label for="no" class="btn-toggle">No</label>
+        </div>
+
+        <button type="submit" class="btn primary-btn">Next →</button>
+      </form>
+
+      <div id="status" class="status"></div>
+
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+
+</body>
+</html>

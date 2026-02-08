@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Questionnaire - Your Email</title>
+  <title>Questionnaire - When is the event?</title>
 
   <link rel="stylesheet" href="css/style.css" />
 
@@ -18,21 +18,21 @@
   <div class="card">
     <div class="card-content">
 
-      <h1>Hi Manya</h1>
-      <p class="subtitle">Please complete this lovely questionnaire</p>
+      <h1>Step 4 of 5</h1>
+      <p class="subtitle">Almost done!</p>
 
       <form id="question-form">
-        <label for="email">Please enter an active email address</label>
+        <label for="eventDate" class="question-label">When is the event?</label>
+
         <input 
-          type="email" 
-          id="email" 
-          name="email" 
-          placeholder="you@example.com" 
+          type="date" 
+          id="eventDate" 
+          name="eventDate" 
           required 
           autofocus
         />
 
-        <button type="submit" class="btn">Start Questionnaire →</button>
+        <button type="submit" class="btn primary-btn">See Summary & Send →</button>
       </form>
 
       <div id="status" class="status"></div>

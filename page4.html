@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Questionnaire - Are you available?</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="background-wrapper"></div>
+
+  <div class="card">
+    <div class="card-content">
+
+      <h1>Step 3 of 5</h1>
+      <p class="subtitle">One more quick question...</p>
+
+      <form id="question-form">
+        <label class="question-label">Are you available?</label>
+
+        <div class="yes-no-group">
+          <input 
+            type="radio" 
+            id="yes" 
+            name="available" 
+            value="Yes" 
+            required 
+          />
+          <label for="yes" class="btn-toggle">Yes</label>
+
+          <input 
+            type="radio" 
+            id="no" 
+            name="available" 
+            value="No" 
+            disabled
+          />
+          <label for="no" class="btn-toggle no-btn" id="noButton">No</label>
+        </div>
+
+        <button type="submit" class="btn primary-btn">Next →</button>
+      </form>
+
+      <div id="status" class="status"></div>
+
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <!-- We can put the fleeing logic here or in a separate script block below -->
+
+  <script>
+    // Fleeing "No" button logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const noBtn = document.getElementById('noButton');
+      if (!noBtn) return;
+
+      const card = document.querySelector('.card');
+      const fleeDistance = 120; // pixels to jump away
+
+      noBtn.addEventListener('mousemove', (e) => {
+        const rect = noBtn.getBoundingClientRect();
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+
+        const btnCenterX = rect.left + rect.width / 2;
+        const btnCenterY = rect.top + rect.height / 2;
+
+        const dx = mouseX - btnCenterX;
+        const dy = mouseY - btnCenterY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        // Only flee if mouse is close (within ~80-100px)
+        if (distance < 100) {
+          // Calculate direction away from mouse
+          let newX = btnCenterX - (dx / distance) * fleeDistance;
+          let newY = btnCenterY - (dy / distance) * fleeDistance;
+
+          // Convert to relative % inside the card (better than absolute px)
+          const cardRect = card.getBoundingClientRect();
+          const percentX = ((newX - cardRect.left) / cardRect.width) * 100;
+          const percentY = ((newY - cardRect.top) / cardRect.height) * 100;
+
+          // Clamp to stay inside card (roughly 5-95%)
+          const clampedX = Math.max(5, Math.min(95, percentX));
+          const clampedY = Math.max(5, Math.min(95, percentY));
+
+          noBtn.style.position = 'absolute';
+          noBtn.style.left = clampedX + '%';
+          noBtn.style.top = clampedY + '%';
+          noBtn.style.transform = 'translate(-50%, -50%)'; // center the button
+        }
+      });
+
+      // Optional: reset position if mouse leaves the card entirely
+      card.addEventListener('mouseleave', () => {
+        noBtn.style.position = '';
+        noBtn.style.left = '';
+        noBtn.style.top = '';
+        noBtn.style.transform = '';
+      });
+    });
+  </script>
+
+</body>
+</html>
